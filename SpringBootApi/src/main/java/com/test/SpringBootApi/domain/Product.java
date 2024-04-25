@@ -15,13 +15,13 @@ public class Product {
     @Column(name = "price")
     private int price;  // int 데이터 형의 가격 선언
 
-    public Product(String productName, int price) { // public 접근 제어자를 통해 외부 클래스에서 생성자 이용 가능
-        this.productName = productName;
+    public Product(String productName, int price) { // 매개변수가 있는 생성자: 객체 생성시 필수적인 데이터 제공 -> 바로 사용 가능한 객체 만듬
+        this.productName = productName;             // public 접근 제어자를 통해 외부 클래스에서 생성자 이용 가능
         this.price = price;
     }
 
-    public Product() {
-
+    public Product() {  // 기본 생성자: 특별한 초기값 없이 객체 생성 가능
+                        // JPA는 엔티티 객체를 생성할 때 내부적으로 기본 생성자 사용
     }
 
     public Long getId() {
