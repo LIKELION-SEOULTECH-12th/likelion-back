@@ -7,12 +7,26 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Optional;
+
 @RestController // 사용자 입력을 http 규칙에 맞춰 서비스를 호출할 수 있도록. 즉, rest를 이용가능하게 해줌
 @RequestMapping("/api") // 어떤 경로로 사용자의 요청을 받을지 -> url
 public class ProductController {
 
     @Autowired
     ProductServiceImpl productService;  // Service 객체 가져와 이용 (구현한 메서드들)
+
+    @GetMapping("/products/{id}")   // api/products/{id}로 작동. id는 변경 가능한 값
+    public ResponseEntity<Optional<Product>> getProductById(@PathVariable("id") long id){
+        try {
+            return ResponseEntity.ok(productService.findById(id));
+            // 응답 객체인 ResponseEntity가 정상적으로 호출이 됐음
+            // id 값을 넘겨줘서 찾음.
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return null;
+    }
 
     @PostMapping("/products")   // api/products를 입력하고 post 방식으로 호출
     public ResponseEntity<Product> createProduct(@RequestBody Product product){
@@ -26,5 +40,7 @@ public class ProductController {
             e.printStackTrace();
         }
         return null;
+    }
+
     }
 }

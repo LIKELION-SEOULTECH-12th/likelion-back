@@ -31,7 +31,18 @@ public class ProductServiceImpl implements ProductService{
     }
 
     @Override
-    public Optional<Product> findById(Long){
+    public Optional<Product> findById(Long id){
+        try{
+            Optional<Product> productData = productRepository.findById(id);
+            // ProductRepository에서 id를 기반으로 찾아 productData 변수에 넣음.
+            // 이때 Optional 타입은 null을 알아서 처리해줌.
+            if(productData.isPresent()){    // product가 존재하면, productData 반환
+                return productData;
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return null;    // 아무것도 없을 경우 null 반환
     }
 
     @Override
