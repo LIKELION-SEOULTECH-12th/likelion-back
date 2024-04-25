@@ -73,5 +73,10 @@ public class ProductServiceImpl implements ProductService{
 
     @Override
     public void delete(Long id){
+        try {
+            productRepository.deleteById(id);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 }

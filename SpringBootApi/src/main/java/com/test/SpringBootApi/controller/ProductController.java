@@ -57,4 +57,15 @@ public class ProductController {
         }
         return null;
     }
+
+    @DeleteMapping("/products/{id}")
+    public ResponseEntity<HttpStatus> deleteProduct(@PathVariable("id") long id){
+        try {
+            productService.delete(id);  // 주소에서 넘겨받은 id를 지움
+            ResponseEntity.noContent(); // ResponseEntity엔 데이터가 없다는 http 상태값 가져옴
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return null;
+    }
 }
