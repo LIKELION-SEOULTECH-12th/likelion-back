@@ -42,5 +42,19 @@ public class ProductController {
         return null;
     }
 
+    @PutMapping("/products/{id}")
+    public ResponseEntity<Product> updateProduct(
+            @PathVariable("id") long id,
+            @RequestBody Product product
+    ){
+        try{
+            ResponseEntity
+                    .status(HttpStatus.CREATED)
+                    .body(productService.update(id, product));
+                    // 사용자에게 입력받은 수정된 값을 productService로 넘겨 db에 저장
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return null;
     }
 }

@@ -42,11 +42,33 @@ public class ProductServiceImpl implements ProductService{
         }catch (Exception e){
             e.printStackTrace();
         }
-        return null;    // 아무것도 없을 경우 null 반환
+        return null;    // 아무것도 없을 경우 null 반
     }
 
     @Override
     public Product update(Long id, Product product){
+        // 수정(업데이트)의 경우, 조회 과정이 선행되어야 함.
+        try{
+            Optional<Product> productData = productRepository.findById(id);
+            if(productData.isPresent()){    // 데이터를 조회 후 존재하는 경우,
+                Product updatedProduct = productData.get();
+                // 새로운 데이터(updatedProduct)에 기존 데이터 정보 주입
+
+                updatedProduct.setProductName(product.getProductName());
+                updatedProduct.setPrice(product.getPrice());
+                // Set 함수 이용해 사용자가 입력한 새로운 정보 덮어씌우기
+
+                productRepository.save(updatedProduct);
+                // 수정된 객체 넘겨 save
+
+                return updatedProduct;
+            }else {
+                return null;
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return null;
     }
 
     @Override
