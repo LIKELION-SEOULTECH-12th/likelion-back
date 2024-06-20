@@ -1,0 +1,14 @@
+version: "3.8"                                          # 파일 규격 버전dock
+services:                                               # 이 항목 밑에 실행하려는 컨테이너들을 정의
+  likelion-database:
+    container_name: likelion-db
+    build: .
+    image: mysql:8.0.36
+    environment:
+      - MYSQL_DATABASE=likelion
+      - MYSQL_ROOT_PASSWORD=1234
+    volumes:
+      - ./database/config:/etc/mysql/conf.d
+      - ./database/init:/docker-entrypoint-initdb.d
+    ports:
+      - "3306:3306"

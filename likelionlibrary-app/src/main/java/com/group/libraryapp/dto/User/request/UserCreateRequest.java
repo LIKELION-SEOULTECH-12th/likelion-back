@@ -1,6 +1,14 @@
 package com.group.libraryapp.dto.User.request;
 
+import lombok.Builder;
+import lombok.Data;
+
+@Data
+@Builder
 public class UserCreateRequest {
+
+    private String name;
+    private Integer age;
     /**
      * 1. 파라미터 만들기
      *

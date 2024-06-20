@@ -1,7 +1,10 @@
 package com.group.libraryapp.dto.User.response;
 
-import com.group.libraryapp.domain.user.User;
+import lombok.Builder;
+import lombok.Data;
 
+@Data
+@Builder
 public class UserResponse {
     /**
      * 1. 필드 구현
@@ -25,4 +28,6 @@ public class UserResponse {
      * [접근자] - [자료형] - get필드() { return 필드 };
      */
 
+    private String name;
+    private Integer age;
 }
